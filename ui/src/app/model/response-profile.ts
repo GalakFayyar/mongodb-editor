@@ -1,6 +1,7 @@
 export class ResponseProfile {
+  _id: string;
   name: string;
-  email: string;
-  designation: string;
-  phoneNumber: number;
+  matchingCriteria: string[];
+  responseType: string;
+  specific: string[];
 }

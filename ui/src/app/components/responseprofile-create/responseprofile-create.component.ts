@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { ApiService } from './../../service/api.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ResponseProfile } from '@app/model/response-profile';
 
 @Component({
   selector: 'app-responseprofile-create',
@@ -27,10 +28,7 @@ export class ResponseProfileCreateComponent implements OnInit {
       { name: 'Response Profile Test', _id: '12345', matchingCriteria: [], responseType: 'REFERENCE', specific: [] }
     ];
 
-    this.availableMatchingCriteria = [
-      'IN->MTI=^1100$',
-      'IN->MTI=^1200$'
-    ];
+    this.availableMatchingCriteria = ['IN->MTI=^1100$', 'IN->MTI=^1200$'];
 
     this.availableSpecific = [
       'MADA_PIN_VALIDATION',
@@ -41,12 +39,10 @@ export class ResponseProfileCreateComponent implements OnInit {
       'MC_ARPC_GENERATION',
       'GCCNET_PIN_VALIDATION',
       'GCCNET_ARQC_VALIDATION',
-      'GCCNET_ARPC_GENERATION',
+      'GCCNET_ARPC_GENERATION'
     ];
 
-    this.cols = [
-      'name', '_id', 'matchingCriteria', 'responseType', 'specific'
-    ];
+    this.cols = ['name', '_id', 'matchingCriteria', 'responseType', 'specific'];
 
     for (let i = 1; i <= 128; i++) {
       this.deFields.push('DE' + i.toString().padStart(3, '0'));
@@ -88,5 +84,14 @@ export class ResponseProfileCreateComponent implements OnInit {
         }
       );
     }
+  }
+
+  submit() {
+    this.responseProfiles.forEach(resposeProfile => {
+      
+    });
+    var rp: ResponseProfile = {
+      _id 
+    };
   }
 }
