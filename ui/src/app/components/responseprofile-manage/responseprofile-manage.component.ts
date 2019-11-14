@@ -1,15 +1,15 @@
 import { Router } from '@angular/router';
-import { ApiService } from './../../service/api.service';
+import { ApiService } from '../../service/api.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseProfile } from '@app/model/response-profile';
 
 @Component({
-  selector: 'app-responseprofile-create',
-  templateUrl: './responseprofile-create.component.html',
-  styleUrls: ['./responseprofile-create.component.scss']
+  selector: 'app-responseprofile-manage',
+  templateUrl: './responseprofile-manage.component.html',
+  styleUrls: ['./responseprofile-manage.component.scss']
 })
-export class ResponseProfileCreateComponent implements OnInit {
+export class ResponseProfileManageComponent implements OnInit {
   submitted = false;
   responseProfileForm: FormGroup;
   Brands: any = ['Mastercard', 'VISA', 'mada', 'UPI', 'GCCNET', 'AMEX'];
@@ -25,7 +25,8 @@ export class ResponseProfileCreateComponent implements OnInit {
 
   ngOnInit() {
     this.responseProfiles = [
-      { name: 'Response Profile Test', _id: '12345', matchingCriteria: [], responseType: 'REFERENCE', specific: [] }
+      { name: 'Response Profile Test 001', _id: '12345', matchingCriteria: [], responseType: 'REFERENCE', specific: [] },
+      { name: 'Response Profile Test 002', _id: '67890', matchingCriteria: [], responseType: 'REFERENCE', specific: [] },
     ];
 
     this.availableMatchingCriteria = ['IN->MTI=^1100$', 'IN->MTI=^1200$'];
@@ -69,29 +70,47 @@ export class ResponseProfileCreateComponent implements OnInit {
     return this.responseProfileForm.controls;
   }
 
-  onSubmit() {
-    this.submitted = true;
-    if (!this.responseProfileForm.valid) {
-      return false;
-    } else {
-      this.apiService.createResponseProfile(this.responseProfileForm.value).subscribe(
-        (res: object) => {
-          console.log('Employee successfully created!');
-          this.ngZone.run(() => this.router.navigateByUrl('/responseprofile-list'));
-        },
-        (error: object) => {
-          console.log(error);
-        }
-      );
-    }
-  }
+  // onSubmit() {
+  //   this.submitted = true;
+  //   if (!this.responseProfileForm.valid) {
+  //     return false;
+  //   } else {
+  //     this.apiService.createResponseProfile(this.responseProfileForm.value).subscribe(
+  //       (res: object) => {
+  //         console.log('Response Profiles successfully created!');
+  //         this.ngZone.run(() => this.router.navigateByUrl('/responseprofile-list'));
+  //       },
+  //       (error: object) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+  // }
 
   submit() {
-    this.responseProfiles.forEach(resposeProfile => {
-      
+    const rps: ResponseProfile[] = [];
+
+    this.responseProfiles.forEach(responseProfile => {
+      const rp: ResponseProfile = {
+        _id: responseProfile._id,
+        name: responseProfile.name,
+        matchingCriteria: responseProfile.matchingCriteria,
+        responseType: responseProfile.responseType,
+        specific: responseProfile.specific
+      };
+      rps.push(rp);
     });
-    var rp: ResponseProfile = {
-      _id 
-    };
+
+    console.log(rps);
+
+    this.apiService.createResponseProfile(rps).subscribe(
+      (res: object) => {
+        console.log('Response Profiles successfully created!');
+        this.ngZone.run(() => this.router.navigateByUrl('/manage-responseprofile'));
+      },
+      (error: object) => {
+        console.log(error);
+      }
+    );
   }
 }

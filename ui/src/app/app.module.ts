@@ -18,12 +18,9 @@ import { AboutModule } from './components/about/about.module';
 import { LoginModule } from './components/login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ResponseProfileCreateComponent } from './components/responseprofile-create/responseprofile-create.component';
-import { ResponseProfileEditComponent } from './components/responseprofile-edit/responseprofile-edit.component';
-import { ResponseProfileListComponent } from './components/responseprofile-list/responseprofile-list.component';
+import { ResponseProfileManageComponent } from './components/responseprofile-manage/responseprofile-manage.component';
 
-import { ResponseProfileCreateRoutingModule } from './components/responseprofile-create/responseprofile-create-routing.module';
-import { ResponseProfileListRoutingModule } from './components/responseprofile-list/responseprofile-list-routing.module';
+import { ResponseProfileManageRoutingModule } from './components/responseprofile-manage/responseprofile-manage-routing.module';
 
 import { ApiService } from './service/api.service';
 
@@ -42,17 +39,14 @@ import { ApiService } from './service/api.service';
     HomeModule,
     AboutModule,
     LoginModule,
-    ResponseProfileCreateRoutingModule,
-    ResponseProfileListRoutingModule,
+    ResponseProfileManageRoutingModule,
     TableModule,
     NgSelectModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [
     AppComponent,
-    ResponseProfileCreateComponent,
-    ResponseProfileEditComponent,
-    ResponseProfileListComponent
+    ResponseProfileManageComponent,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

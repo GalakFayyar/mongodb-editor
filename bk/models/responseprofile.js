@@ -22,4 +22,7 @@ let ResponseProfile = new Schema({
     collection: 'responseProfiles'
 });
 
+// Avoid deprecated methods
+mongoose.set('useFindAndModify', false);
+
 module.exports = mongoose.model('ResponseProfile', ResponseProfile);

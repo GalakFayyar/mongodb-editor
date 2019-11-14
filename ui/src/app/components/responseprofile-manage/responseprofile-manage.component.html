@@ -9,9 +9,9 @@
                         <span class="input-group-text" id="brand-label">Brand</span>
                     </div>
                     <select class="custom-select form-control" (change)="updateBrand($event.target.value)" formControlName="brand" id="inputBrand" aria-describedby="brand-label">
-            <option value="">Select a brand...</option>
-            <option *ngFor="let brand of Brands" value="{{ brand }}">{{ brand }}</option>
-          </select>
+                      <option value="">Select a brand...</option>
+                      <option *ngFor="let brand of Brands" value="{{ brand }}">{{ brand }}</option>
+                    </select>
                     <!-- error -->
                     <div class="invalid-feedback" *ngIf="submitted && myForm.brand.errors?.required">
                         Brand is required.
@@ -102,6 +102,6 @@
         </p-table>
     </div>
     <div class="form-group col-sm">
-        <button class="btn btn-success btn-lg btn-block" type="submit">Register</button>
+        <button class="btn btn-success btn-lg btn-block" (click)="submit()">Register</button>
     </div>
 </div>

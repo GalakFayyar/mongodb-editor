@@ -2,21 +2,27 @@ const express = require('express');
 const app = express();
 const responseProfileRoute = express.Router();
 
-// Employee model
+// Response Profile model
 let ResponseProfile = require('../models/responseprofile');
 
-// Add Employee
 responseProfileRoute.route('/create').post((req, res, next) => {
-    ResponseProfile.create(req.body, (error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            res.json(data)
-        }
-    })
+    var result = [];
+    req.body.forEach(rp => {
+        console.log(rp);
+        var query = { '_id': rp._id };
+        ResponseProfile.findOneAndUpdate(query, rp, { upsert: true }, (error, data) => {
+            if (error) {
+                return next(error);
+            } else {
+                result.push(data);
+            }
+        });
+    });
+    res.json(result);
+    res.end();
 });
 
-// Get All Employees
+// Get All Response Profiles
 responseProfileRoute.route('/').get((req, res) => {
     ResponseProfile.find((error, data) => {
         if (error) {
@@ -27,7 +33,7 @@ responseProfileRoute.route('/').get((req, res) => {
     })
 });
 
-// Get single employee
+// Get single Response Profile
 responseProfileRoute.route('/read/:id').get((req, res) => {
     ResponseProfile.findById(req.params.id, (error, data) => {
         if (error) {
@@ -38,9 +44,7 @@ responseProfileRoute.route('/read/:id').get((req, res) => {
     })
 });
 
-
-
-// Update employee
+// Update Response Profile
 responseProfileRoute.route('/update/:id').put((req, res, next) => {
     ResponseProfile.findByIdAndUpdate(req.params.id, {
         $set: req.body
@@ -55,7 +59,7 @@ responseProfileRoute.route('/update/:id').put((req, res, next) => {
     })
 });
 
-// Delete employee
+// Delete Response Profile
 responseProfileRoute.route('/delete/:id').delete((req, res, next) => {
     ResponseProfile.findOneAndRemove(req.params.id, (error, data) => {
         if (error) {
