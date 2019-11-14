@@ -5,16 +5,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseProfile } from '@app/model/response-profile';
 
 @Component({
-  selector: 'app-responseprofile-manage',
-  templateUrl: './responseprofile-manage.component.html',
-  styleUrls: ['./responseprofile-manage.component.scss']
+  selector: 'app-responseprofile-manager',
+  templateUrl: './responseprofile-manager.component.html',
+  styleUrls: ['./responseprofile-manager.component.scss']
 })
-export class ResponseProfileManageComponent implements OnInit {
+export class ResponseProfileManagerComponent implements OnInit {
   submitted = false;
   responseProfileForm: FormGroup;
   Brands: any = ['Mastercard', 'VISA', 'mada', 'UPI', 'GCCNET', 'AMEX'];
   deFields: any = [];
-  responseProfiles: any[];
+  responseProfiles: any[] = [];
   availableMatchingCriteria: any[];
   availableSpecific: any[];
   cols: any[];
@@ -24,10 +24,15 @@ export class ResponseProfileManageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.responseProfiles = [
-      { name: 'Response Profile Test 001', _id: '12345', matchingCriteria: [], responseType: 'REFERENCE', specific: [] },
-      { name: 'Response Profile Test 002', _id: '67890', matchingCriteria: [], responseType: 'REFERENCE', specific: [] },
-    ];
+    this.apiService.getResponseProfiles().subscribe(
+      (res: any[]) => {
+        console.log(res);
+        this.responseProfiles = res;
+      },
+      (error: object) => {
+        console.log(error);
+      }
+    );
 
     this.availableMatchingCriteria = ['IN->MTI=^1100$', 'IN->MTI=^1200$'];
 
@@ -43,7 +48,7 @@ export class ResponseProfileManageComponent implements OnInit {
       'GCCNET_ARPC_GENERATION'
     ];
 
-    this.cols = ['name', '_id', 'matchingCriteria', 'responseType', 'specific'];
+    this.cols = ['_id', 'name', 'matchingCriteria', 'responseType', 'specific'];
 
     for (let i = 1; i <= 128; i++) {
       this.deFields.push('DE' + i.toString().padStart(3, '0'));
@@ -70,23 +75,6 @@ export class ResponseProfileManageComponent implements OnInit {
     return this.responseProfileForm.controls;
   }
 
-  // onSubmit() {
-  //   this.submitted = true;
-  //   if (!this.responseProfileForm.valid) {
-  //     return false;
-  //   } else {
-  //     this.apiService.createResponseProfile(this.responseProfileForm.value).subscribe(
-  //       (res: object) => {
-  //         console.log('Response Profiles successfully created!');
-  //         this.ngZone.run(() => this.router.navigateByUrl('/responseprofile-list'));
-  //       },
-  //       (error: object) => {
-  //         console.log(error);
-  //       }
-  //     );
-  //   }
-  // }
-
   submit() {
     const rps: ResponseProfile[] = [];
 
@@ -101,12 +89,10 @@ export class ResponseProfileManageComponent implements OnInit {
       rps.push(rp);
     });
 
-    console.log(rps);
-
     this.apiService.createResponseProfile(rps).subscribe(
       (res: object) => {
         console.log('Response Profiles successfully created!');
-        this.ngZone.run(() => this.router.navigateByUrl('/manage-responseprofile'));
+        this.ngZone.run(() => this.router.navigateByUrl('/responseprofiles-manager'));
       },
       (error: object) => {
         console.log(error);

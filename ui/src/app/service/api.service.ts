@@ -12,20 +12,22 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  // Create
+  // RESPONSE PROFILES ROUTES
+
+  // Create Response Profiles
   createResponseProfile(data: object): Observable<any> {
-    let url = `${this.baseUri}/create`;
+    let url = `${this.baseUri}/responseprofiles/create`;
     return this.http.post(url, data).pipe(catchError(this.errorMgmt));
   }
 
-  // Get all employees
+  // Get all Response Profiles
   getResponseProfiles() {
-    return this.http.get(`${this.baseUri}`);
+    return this.http.get(`${this.baseUri}/responseprofiles`);
   }
 
-  // Get employee
+  // Get Response Profile
   getResponseProfile(id: string): Observable<any> {
-    let url = `${this.baseUri}/read/${id}`;
+    let url = `${this.baseUri}/responseprofiles/read/${id}`;
     return this.http.get(url, { headers: this.headers }).pipe(
       map((res: Response) => {
         return res || {};
@@ -34,15 +36,52 @@ export class ApiService {
     );
   }
 
-  // Update employee
+  // Update Response Profile
   updateResponseProfile(id: string, data: object): Observable<any> {
-    let url = `${this.baseUri}/update/${id}`;
+    let url = `${this.baseUri}/responseprofiles/update/${id}`;
     return this.http.put(url, data, { headers: this.headers }).pipe(catchError(this.errorMgmt));
   }
 
-  // Delete employee
+  // Delete Response Profile
   deleteResponseProfile(id: string): Observable<any> {
-    let url = `${this.baseUri}/delete/${id}`;
+    let url = `${this.baseUri}/responseprofiles/delete/${id}`;
+    return this.http.delete(url, { headers: this.headers }).pipe(catchError(this.errorMgmt));
+  }
+
+
+  // RULES ROUTES
+
+  // Create Rules
+  createRules(data: object): Observable<any> {
+    let url = `${this.baseUri}/rules/create`;
+    return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+  }
+
+  // Get all Rules
+  getRules() {
+    return this.http.get(`${this.baseUri}/rules`);
+  }
+
+  // Get Rule
+  getRule(id: string): Observable<any> {
+    let url = `${this.baseUri}/rules/read/${id}`;
+    return this.http.get(url, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {};
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
+
+  // Update Rule
+  updateRule(id: string, data: object): Observable<any> {
+    let url = `${this.baseUri}/rules/update/${id}`;
+    return this.http.put(url, data, { headers: this.headers }).pipe(catchError(this.errorMgmt));
+  }
+
+  // Delete Rule
+  deleteRule(id: string): Observable<any> {
+    let url = `${this.baseUri}/rules/delete/${id}`;
     return this.http.delete(url, { headers: this.headers }).pipe(catchError(this.errorMgmt));
   }
 

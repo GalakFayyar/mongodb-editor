@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { environment } from '@env/environment';
@@ -18,15 +20,18 @@ import { AboutModule } from './components/about/about.module';
 import { LoginModule } from './components/login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ResponseProfileManageComponent } from './components/responseprofile-manage/responseprofile-manage.component';
+import { ResponseProfileManagerComponent } from './components/responseprofile-manager/responseprofile-manager.component';
+import { RuleManagerComponent } from './components/rule-manager/rule-manager.component';
 
-import { ResponseProfileManageRoutingModule } from './components/responseprofile-manage/responseprofile-manage-routing.module';
+import { ResponseProfileManagerRoutingModule } from './components/responseprofile-manager/responseprofile-manager-routing.module';
+import { RuleManagerRoutingModule } from './components/rule-manager/rule-manager-routing.module';
 
 import { ApiService } from './service/api.service';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
     FormsModule,
     ReactiveFormsModule,
@@ -38,15 +43,18 @@ import { ApiService } from './service/api.service';
     ShellModule,
     HomeModule,
     AboutModule,
+    ResponseProfileManagerRoutingModule,
+    RuleManagerRoutingModule,
     LoginModule,
-    ResponseProfileManageRoutingModule,
     TableModule,
+    DropdownModule,
     NgSelectModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [
     AppComponent,
-    ResponseProfileManageComponent,
+    ResponseProfileManagerComponent,
+    RuleManagerComponent,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

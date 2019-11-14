@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { extract } from '@app/core';
 import { Shell } from '@app/shell/shell.service';
-import { ResponseProfileManageComponent } from './responseprofile-manage.component';
+import { RuleManagerComponent } from './rule-manager.component';
 
 const routes: Routes = [
   Shell.childRoutes([
     {
-      path: 'manage-responseprofile',
-      component: ResponseProfileManageComponent,
-      data: { title: extract('Manage Response Profiles') }
+      path: 'rules-manager',
+      component: RuleManagerComponent,
+      data: { title: extract('ManageRules') }
     }
   ])
 ];
@@ -20,4 +20,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class ResponseProfileManageRoutingModule {}
+export class RuleManagerRoutingModule {}

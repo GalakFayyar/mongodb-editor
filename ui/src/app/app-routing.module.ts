@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ResponseProfileManageComponent } from './components/responseprofile-manage/responseprofile-manage.component';
+import { ResponseProfileManagerComponent } from './components/responseprofile-manager/responseprofile-manager.component';
 
 const routes: Routes = [
   // Fallback when no prior route is matched
   //{ path: '**', redirectTo: '', pathMatch: 'full' }
-  { path: '', pathMatch: 'full', redirectTo: 'manage-responseprofile' },
-  { path: 'manage-responseprofile', component: ResponseProfileManageComponent },
+  // { path: '', pathMatch: 'full', redirectTo: '/manage-responseprofile' },
+  // { path: 'manage-responseprofile', component: ResponseProfileManagerComponent },
 ];
 
 @NgModule({

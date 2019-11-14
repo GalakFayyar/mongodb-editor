@@ -1,15 +1,16 @@
 const express = require('express');
 const app = express();
-const responseProfileRoute = express.Router();
+const ruleRoute = express.Router();
 
 // Response Profile model
-let ResponseProfile = require('../models/responseprofile');
+let Rule = require('../models/rule');
 
-responseProfileRoute.route('/create').post((req, res, next) => {
-    req.body.forEach(rp => {
-        console.log(rp);
-        var query = { '_id': rp._id };
-        ResponseProfile.findOneAndUpdate(query, rp, { upsert: true }, (error, data) => {
+ruleRoute.route('/create').post((req, res, next) => {
+    console.log(req.body);
+    req.body.forEach(rule => {
+        console.log(rule);
+        var query = { '_id': rule._id };
+        Rule.findOneAndUpdate(query, rule, { upsert: true }, (error, data) => {
             if (error) {
                 return next(error);
             }
@@ -19,8 +20,8 @@ responseProfileRoute.route('/create').post((req, res, next) => {
 });
 
 // Get All
-responseProfileRoute.route('/').get((req, res) => {
-    ResponseProfile.find((error, data) => {
+ruleRoute.route('/').get((req, res) => {
+    Rule.find((error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -30,8 +31,8 @@ responseProfileRoute.route('/').get((req, res) => {
 });
 
 // Get single
-responseProfileRoute.route('/read/:id').get((req, res) => {
-    ResponseProfile.findById(req.params.id, (error, data) => {
+ruleRoute.route('/read/:id').get((req, res) => {
+    Rule.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error)
         } else {
@@ -41,8 +42,8 @@ responseProfileRoute.route('/read/:id').get((req, res) => {
 });
 
 // Update
-responseProfileRoute.route('/update/:id').put((req, res, next) => {
-    ResponseProfile.findByIdAndUpdate(req.params.id, {
+ruleRoute.route('/update/:id').put((req, res, next) => {
+    Rule.findByIdAndUpdate(req.params.id, {
         $set: req.body
     }, (error, data) => {
         if (error) {
@@ -56,8 +57,8 @@ responseProfileRoute.route('/update/:id').put((req, res, next) => {
 });
 
 // Delete
-responseProfileRoute.route('/delete/:id').delete((req, res, next) => {
-    ResponseProfile.findOneAndRemove(req.params.id, (error, data) => {
+ruleRoute.route('/delete/:id').delete((req, res, next) => {
+    Rule.findOneAndRemove(req.params.id, (error, data) => {
         if (error) {
             return next(error);
         } else {
@@ -68,4 +69,4 @@ responseProfileRoute.route('/delete/:id').delete((req, res, next) => {
     })
 });
 
-module.exports = responseProfileRoute;
+module.exports = ruleRoute;
