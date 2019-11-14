@@ -1,106 +1,75 @@
-<div class="row justify-content">
-    <!-- form card register -->
-    <div class="card-body">
-        <form [formGroup]="responseProfileForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="form-group input-group input-group-sm col-sm">
-                    <!-- <label for="inputBrand">Brand</label> -->
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="brand-label">Brand</span>
-                    </div>
-                    <select class="custom-select form-control" (change)="updateBrand($event.target.value)" formControlName="brand" id="inputBrand" aria-describedby="brand-label">
-                      <option value="">Select a brand...</option>
-                      <option *ngFor="let brand of Brands" value="{{ brand }}">{{ brand }}</option>
-                    </select>
-                    <!-- error -->
-                    <div class="invalid-feedback" *ngIf="submitted && myForm.brand.errors?.required">
-                        Brand is required.
-                    </div>
-                </div>
-
-                <div class="form-group input-group input-group-sm col-sm">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputVersion">Version</span>
-                    </div>
-                    <input type="text" class="form-control" formControlName="version" aria-label="Version" aria-describedby="inputVersion" />
-                </div>
-
-                <div class="form-group input-group input-group-sm col-sm">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputType">Type</span>
-                    </div>
-                    <input type="text" class="form-control" formControlName="type" aria-label="Type" aria-describedby="inputType" />
-                </div>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-group input-group input-group-sm col-sm">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="brand-label">Brand</span>
             </div>
-        </form>
-        <p-table [columns]="cols" [value]="responseProfiles" [paginator]="true" [rows]="10">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th scope="col">_id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Matching Criteria</th>
-                    <th scope="col">Specific</th>
-                    <th scope="col">Response Type</th>
-                    <!-- <th scope="col">Test Plan</th>
-            <th scope="col">Subset</th>
-            <th scope="col">Card</th>
-            <th scope="col">Description</th>
-            <th *ngFor="let fieldName of deFields">{{ fieldName }}</th> -->
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr>
-                    <td>{{ rowData._id }}</td>
+            <select class="custom-select form-control" (change)="updateBrand($event.target.value)" aria-describedby="brand-label">
+              <option value="">Select a brand...</option>
+              <option *ngFor="let brand of Brands" value="{{ brand }}">{{ brand }}</option>
+            </select>
+        </div>
 
-                    <td pEditableColumn>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input type="text" [(ngModel)]="rowData.name" required [(value)]="rowData.name" />
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{ rowData.name }}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>
+        <div class="form-group input-group input-group-sm col-sm">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputVersion">Version</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Version" aria-describedby="inputVersion" />
+        </div>
 
-                    <td pEditableColumn>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <ng-select multiple="true" dropdownPosition="auto" [searchable]="true" [items]="availableMatchingCriteria" [(ngModel)]="rowData.matchingCriteria" [addTag]="true" name="multiSelectMatchingCriteria"></ng-select>
-                                <!-- <input type="text" [(ngModel)]="rowData.matchingCriteria" [(value)]="rowData.matchingCriteria" /> -->
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{ rowData.matchingCriteria }}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>
-                    <td pEditableColumn>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <ng-select multiple="true" dropdownPosition="auto" [searchable]="true" [items]="availableSpecific" [(ngModel)]="rowData.specific" [closeOnSelect]="false" [addTag]="true" name="multiSelectSpecific"></ng-select>
-                                <!-- <input type="text" [(ngModel)]="rowData.matchingCriteria" [(value)]="rowData.matchingCriteria" /> -->
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{ rowData.specific }}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>
-                    <td pEditableColumn>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input type="text" [(ngModel)]="rowData.responseType" [(value)]="rowData.responseType" />
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{ rowData.responseType }}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <div class="form-group input-group input-group-sm col-sm">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputType">Type</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Type" aria-describedby="inputType" />
+        </div>
     </div>
-    <div class="form-group col-sm">
+
+    <div class="row">
+        <p-table
+        class="col-md-12"
+        [value]="responseProfiles"
+        [paginator]="true"
+        [rows]="10"
+        [scrollable]="true"
+        [columns]="scrollableColumns"
+        [frozenColumns]="frozenColumns"
+        frozenWidth="300px">
+
+          <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                  <col *ngFor="let col of columns">
+              </colgroup>
+          </ng-template>
+
+          <ng-template pTemplate="header" let-columns>
+              <tr style="height:80px;">
+                  <th *ngFor="let col of columns" [style.width]="col.width">
+                      {{col.header}}
+                  </th>
+              </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr style="height:80px;">
+                  <td pEditableColumn *ngFor="let col of columns" [style.width]="col.width">
+                      <p-cellEditor>
+                          <ng-template pTemplate="input">
+                              <input *ngIf="col.type=='text'" type="text" [(ngModel)]="rowData[col.field]" [(value)]="rowData[col.field]" />
+                              <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.field]" [(ngModel)]="rowData[col.field]" [closeOnSelect]="false" [addTag]="true"></ng-select>
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              <span *ngIf="col.type=='text'">{{ rowData[col.field] }}</span>
+                              <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.field]" [(ngModel)]="rowData[col.field]" disabled></ng-select>
+                          </ng-template>
+                      </p-cellEditor>
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+    </div>
+
+    <div class="row col-sm">
         <button class="btn btn-success btn-lg btn-block" (click)="submit()">Register</button>
     </div>
 </div>

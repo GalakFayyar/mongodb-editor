@@ -1,13 +1,14 @@
 import { Router } from '@angular/router';
 import { ApiService } from '../../service/api.service';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseProfile } from '@app/model/response-profile';
 
 @Component({
   selector: 'app-responseprofile-manager',
   templateUrl: './responseprofile-manager.component.html',
-  styleUrls: ['./responseprofile-manager.component.scss']
+  styleUrls: ['./responseprofile-manager.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ResponseProfileManagerComponent implements OnInit {
   submitted = false;
@@ -15,9 +16,29 @@ export class ResponseProfileManagerComponent implements OnInit {
   Brands: any = ['Mastercard', 'VISA', 'mada', 'UPI', 'GCCNET', 'AMEX'];
   deFields: any = [];
   responseProfiles: any[] = [];
-  availableMatchingCriteria: any[];
-  availableSpecific: any[];
-  cols: any[];
+  scrollableColumns: any[] = [
+    { field: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
+    { field: 'specific', header: 'Specific', width: '250px', type: 'multi' },
+    { field: 'responseType', header: 'Response Type', width: '150px', type: 'text' },
+  ];
+  frozenColumns: any[] = [
+    { field: 'name', header: 'Name', type: 'text' }
+  ];
+
+  itemList: any = {
+    machingCriteria: ['IN->MTI=^1100$', 'IN->MTI=^1200$'],
+    specific: [
+      'MADA_PIN_VALIDATION',
+      'MADA_ARQC_VALIDATION',
+      'MADA_ARPC_GENERATION',
+      'MC_PIN_VALIDATION',
+      'MC_ARQC_VALIDATION',
+      'MC_ARPC_GENERATION',
+      'GCCNET_PIN_VALIDATION',
+      'GCCNET_ARQC_VALIDATION',
+      'GCCNET_ARPC_GENERATION'
+    ]
+  }
 
   constructor(public fb: FormBuilder, private router: Router, private ngZone: NgZone, private apiService: ApiService) {
     this.mainForm();
@@ -34,24 +55,13 @@ export class ResponseProfileManagerComponent implements OnInit {
       }
     );
 
-    this.availableMatchingCriteria = ['IN->MTI=^1100$', 'IN->MTI=^1200$'];
-
-    this.availableSpecific = [
-      'MADA_PIN_VALIDATION',
-      'MADA_ARQC_VALIDATION',
-      'MADA_ARPC_GENERATION',
-      'MC_PIN_VALIDATION',
-      'MC_ARQC_VALIDATION',
-      'MC_ARPC_GENERATION',
-      'GCCNET_PIN_VALIDATION',
-      'GCCNET_ARQC_VALIDATION',
-      'GCCNET_ARPC_GENERATION'
-    ];
-
-    this.cols = ['_id', 'name', 'matchingCriteria', 'responseType', 'specific'];
-
-    for (let i = 1; i <= 128; i++) {
-      this.deFields.push('DE' + i.toString().padStart(3, '0'));
+    for (let i = 2; i <= 127; i++) {
+      this.scrollableColumns.push({
+        field: 'DE' + i.toString().padStart(3, '0'),
+        header: 'DE' + i.toString().padStart(3, '0'),
+        type: 'text',
+        width: '150px'
+      });
     }
   }
 

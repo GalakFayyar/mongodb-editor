@@ -2,3 +2,11 @@
  * Global application theme.
  * Framework overrides and customization goes here.
  */
+
+ .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-label {
+  font-size: x-small !important;
+  padding-bottom: none !important;
+}
+.ng-select.ng-select-multiple  {
+  font-size: x-small;
+}

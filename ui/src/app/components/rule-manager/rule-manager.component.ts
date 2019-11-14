@@ -1,18 +1,18 @@
 import { Router } from '@angular/router';
 import { ApiService } from '../../service/api.service';
-import { Component, OnInit, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import { Rule } from '@app/model/rule';
 
 @Component({
   selector: 'app-rule-manager',
   templateUrl: './rule-manager.component.html',
-  styleUrls: ['./rule-manager.component.scss']
+  styleUrls: ['./rule-manager.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RuleManagerComponent implements OnInit {
   submitted = false;
   cols: any[] = [
-    { field: '_id', header: 'Id' },
+    // { field: '_id', header: 'Id' },
     { field: 'name', header: 'Name' },
     { field: 'description', header: 'Description' },
     { field: 'type', header: 'Type' },
@@ -34,7 +34,7 @@ export class RuleManagerComponent implements OnInit {
   availableUpdateModes: string[] = ['APPEND', 'CREATE_OR_REPLACE'];
   availableCustomProcessors: any[];
 
-  constructor(public fb: FormBuilder, private router: Router, private ngZone: NgZone, private apiService: ApiService) {
+  constructor(private router: Router, private ngZone: NgZone, private apiService: ApiService) {
   }
 
   ngOnInit() {
@@ -47,23 +47,8 @@ export class RuleManagerComponent implements OnInit {
       }
     );
 
-    // this.cols = [
-    //   { field: 'name', header: 'Name' },
-    //   { field: 'description', header: 'Description' },
-    //   { field: 'type', header: 'Type' },
-    //   { field: 'source', header: 'Source' },
-    //   { field: 'dest', header: 'Destination' },
-    //   { field: 'format', header: 'Format' },
-    //   { field: 'copyMode', header: 'CopyMode' },
-    //   { field: 'customProcessor', header: 'CustomProcessor' },
-    //   { field: 'params', header: 'Params' },
-    //   { field: 'ifOkRule', header: 'IfOkRule' },
-    //   { field: 'ifNotOkRule', header: 'IfNotOkRule' }
-    // ];
-
     this.rules = [
       {
-        _id: '111111',
         name: 'Rule 1',
         description: 'desc 1',
         type: 'REFERENCE',
@@ -78,7 +63,6 @@ export class RuleManagerComponent implements OnInit {
       }
     ]
   }
-
 
   submit() {
     const rules: Rule[] = [];
