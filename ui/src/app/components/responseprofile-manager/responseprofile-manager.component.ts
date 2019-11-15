@@ -17,12 +17,12 @@ export class ResponseProfileManagerComponent implements OnInit {
   deFields: any = [];
   responseProfiles: any[] = [];
   scrollableColumns: any[] = [
-    { field: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
-    { field: 'specific', header: 'Specific', width: '250px', type: 'multi' },
     { field: 'responseType', header: 'Response Type', width: '150px', type: 'text' },
   ];
   frozenColumns: any[] = [
-    { field: 'name', header: 'Name', type: 'text' }
+    { field: 'name', width: '300px', header: 'Name', type: 'text' },
+    { field: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
+    { field: 'specific', header: 'Specific', width: '250px', type: 'multi' },
   ];
 
   itemList: any = {

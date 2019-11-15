@@ -1,0 +1,1018 @@
+{
+    "Rules": [
+        {
+            "name": "AMEX_ARPC_GENERATION",
+            "description": "AMEX ARPC Generation",
+            "type": "Custom",
+            "dest": "OUT.DE055",
+            "copyMode": "Append",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Amex_Arpc",
+            "params": "applicability=TRUE;CVN=AUTO|ARC=0012"
+        },
+        {
+            "name": "AMEX_ARQC_VALIDATION",
+            "description": "AMEX ARQC Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Amex_Arqc",
+            "params": "applicability=TRUE;CVN=AUTO"
+        },
+        {
+            "name": "AMEX_PIN_VALIDATION",
+            "description": "AMEX PIN Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.PIN_Validation",
+            "params": "applicability=TRUE;PIN_value=1234|key=OUT.DE039|keyvalue_fail=117"
+        },
+        {
+            "name": "DATE_TIME_MMDD_DE016",
+            "description": "Now Date Time for format MMdd",
+            "type": "Custom",
+            "dest": "OUT.DE016",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.DateTime",
+            "params": "MMdd"
+        },
+        {
+            "name": "DO_NOT_RESPOND",
+            "description": "Do not respond",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.DelayResponse",
+            "params": "0"
+        },
+        {
+            "name": "GCCNET_ARPC_GENERATION",
+            "description": "GCC Net ARPC Generation",
+            "type": "Custom",
+            "dest": "OUT.DE055",
+            "copyMode": "Append",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.GCCNet_Arpc",
+            "params": "applicability=TRUE;CVN=AUTO|ARC=0012"
+        },
+        {
+            "name": "GCCNET_ARQC_VALIDATION",
+            "description": "GCC Net ARQC Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.GCCNet_Arqc",
+            "params": "applicability=TRUE;CVN=AUTO"
+        },
+        {
+            "name": "GCCNET_DE039_014",
+            "description": "Set 014 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.014",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "GCCNET_DE039_051",
+            "description": "Set 063 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.051",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "GCCNET_DE039_054",
+            "description": "Set 054 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.054",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "GCCNET_DE039_076",
+            "description": "Set 076 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.076",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "GCCNET_DE039_078",
+            "description": "Set 078 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.078",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "GCCNET_DE039_082",
+            "description": "Set 082 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.082",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "GCCNET_DE039_20",
+            "description": "Set 20 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.20",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "GCCNET_DE039_21",
+            "description": "Set 21 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.21",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "GCCNET_PIN_VALIDATION",
+            "description": "GCC Net PIN Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.PIN_Validation",
+            "params": "applicability=TRUE;PIN_value=1234|key=OUT.DE039|keyvalue_fail=117"
+        },
+        {
+            "name": "INCREMENTOR_DE038",
+            "description": "Incrementor for DE038",
+            "type": "Custom",
+            "dest": "OUT.DE038",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Incrementor",
+            "params": "applicability=TRUE;key=DE038|init_value=000001"
+        },
+        {
+            "name": "MADA_ARPC_FIXED_VALUE",
+            "description": "mada ARPC Generation (Fixed Value)",
+            "type": "Copy",
+            "source": "CONST.910A00112233445566770012",
+            "dest": "OUT.DE055",
+            "copyMode": "Append"
+        },
+        {
+            "name": "MADA_ARPC_GENERATION",
+            "description": "mada ARPC Generation",
+            "type": "Custom",
+            "dest": "OUT.DE055",
+            "copyMode": "Append",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Mada_Arpc",
+            "params": "applicability=TRUE;CVN=AUTO|ARC=0012"
+        },
+        {
+            "name": "MADA_ARQC_VALIDATION",
+            "description": "mada ARQC Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Mada_Arqc",
+            "params": "applicability=TRUE;CVN=AUTO"
+        },
+        {
+            "name": "MADA_DE038_RANDOM_VALUE",
+            "description": "Generate Random DE038",
+            "type": "Custom",
+            "dest": "OUT.DE038",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Random",
+            "params": "applicability=TRUE;Format=an|Length=6"
+        },
+        {
+            "name": "MADA_DE039_001",
+            "description": "Set 001 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.001",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_003",
+            "description": "Set 003 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.003",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_087",
+            "description": "Set 087 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.087",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_089",
+            "description": "Set 089 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.089",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_100",
+            "description": "Set 100 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.100",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_101",
+            "description": "Set 101 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.101",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_101",
+            "description": "Set 101 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.101",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_102",
+            "description": "Set 102 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.102",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_103",
+            "description": "Set 103 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.103",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_104",
+            "description": "Set 104 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.104",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_106",
+            "description": "Set 106 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.106",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_107",
+            "description": "Set 107 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.107",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_108",
+            "description": "Set 108 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.108",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_108",
+            "description": "Set 108 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.108",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_109",
+            "description": "Set 109 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.109",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_110",
+            "description": "Set 110 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.110",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_111",
+            "description": "Set 111 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.111",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_111",
+            "description": "Set 111 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.111",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_112",
+            "description": "Set 112 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.112",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_114",
+            "description": "Set 114 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.114",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_115",
+            "description": "Set 115 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.115",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_116",
+            "description": "Set 116 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.116",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_116",
+            "description": "Set 116 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.116",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_117",
+            "description": "Set 117 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.117",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_118",
+            "description": "Set 118 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.118",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_119",
+            "description": "Set 119 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.119",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_121",
+            "description": "Set 121 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.121",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_122",
+            "description": "Set 122 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.122",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_123",
+            "description": "Set 123 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.123",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_125",
+            "description": "Set 125 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.125",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_126",
+            "description": "Set 126 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.126",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_127",
+            "description": "Set 127 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.127",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_128",
+            "description": "Set 128 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.128",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_129",
+            "description": "Set 129 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.129",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_185",
+            "description": "Set 185 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.185",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_195",
+            "description": "Set 195 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.195",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_196",
+            "description": "Set 196 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.196",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_200",
+            "description": "Set 200 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.200",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_201",
+            "description": "Set 201 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.201",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_202",
+            "description": "Set 202 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.202",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_204",
+            "description": "Set 204 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.204",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_206",
+            "description": "Set 206 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.206",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_207",
+            "description": "Set 207 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.207",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_208",
+            "description": "Set 208 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.208",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_209",
+            "description": "Set 209 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.209",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_210",
+            "description": "Set 210 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.210",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_400",
+            "description": "Set 400 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.400",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_480",
+            "description": "Set 480 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.480",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_481",
+            "description": "Set 481 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.481",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_902",
+            "description": "Set 902 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.902",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_904",
+            "description": "Set 904 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.904",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_907",
+            "description": "Set 907 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.907",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_910",
+            "description": "Set 910 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.910",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_911",
+            "description": "Set 911 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.911",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_912",
+            "description": "Set 912 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.912",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_913",
+            "description": "Set 913 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.913",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_DE039_916",
+            "description": "Set 916 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.916",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MADA_ISSUER_SCRIPT_GENERATION_1",
+            "description": "mada Issuer Script Generation",
+            "type": "Custom",
+            "dest": "OUT.DE055",
+            "copyMode": "Append",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Mada_IssuerScript",
+            "params": "applicability=TRUE;script=72||841E000008:MAC"
+        },
+        {
+            "name": "MADA_ISSUER_SCRIPT_GENERATION_3",
+            "description": "mada Issuer Script Generation",
+            "type": "Custom",
+            "dest": "OUT.DE055",
+            "copyMode": "Append",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Mada_IssuerScript",
+            "params": "applicability=TRUE;script=72||841E000008:MAC|841E000008:MAC|841E000008:MAC"
+        },
+        {
+            "name": "MADA_PIN_VALIDATION",
+            "description": "mada PIN Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Mada_PIN_Validation",
+            "params": "applicability=TRUE;PIN_value=1234|key=OUT.DE039|keyvalue_fail=117"
+        },
+        {
+            "name": "MADA_PIN_VALIDATION_6_DIGITS",
+            "description": "mada PIN Validation (6 Digits)",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Mada_PIN_Validation",
+            "params": "applicability=TRUE;PIN_value=123456|key=OUT.DE039|keyvalue_fail=117"
+        },
+        {
+            "name": "MASTERCARD_ARPC_GENERATION",
+            "description": "Mastercard ARPC Generation",
+            "type": "Custom",
+            "dest": "OUT.DE055",
+            "copyMode": "Append",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.MC_Arpc",
+            "params": "applicability=TRUE;CVN=AUTO|ARC=0012|key=OUT.DE055|ChipKey=IssuerMasterKey"
+        },
+        {
+            "name": "MASTERCARD_ARQC_VALIDATION",
+            "description": "Mastercard ARQC Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.MC_Arqc",
+            "params": "applicability=True;CVN=AUTO|key=OUT.DE039|ChipKey=IssuerMasterKey"
+        },
+        {
+            "name": "MASTERCARD_DE038",
+            "description": "Incrementor DE038 if it is present",
+            "type": "Check_Presence",
+            "source": "OUT.DE038",
+            "IfOKRule": "INCREMENTOR_DE038"
+        },
+        {
+            "name": "MASTERCARD_DE039_030",
+            "description": "Set 030 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.030",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MASTERCARD_DE039_051",
+            "description": "Set 051 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.051",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MASTERCARD_DE039_12",
+            "description": "Set 12 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.12",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MASTERCARD_DE039_34",
+            "description": "Set 34 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.34",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "MASTERCARD_DE054",
+            "description": "DE054 - Partial Approval/Balance inquiry",
+            "type": "Custom",
+            "dest": "OUT.DE054",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.MC_DE054"
+        },
+        {
+            "name": "MASTERCARD_PIN_VALIDATION",
+            "description": "Mastercard PIN Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.PIN_Validation",
+            "params": "applicability=TRUE;PIN_value=1234|key=OUT.DE039|keyvalue_fail=117"
+        },
+        {
+            "name": "RULE-DATE_TIME_MMDD_DE015",
+            "description": "Now Date Time for format MMdd",
+            "type": "Custom",
+            "dest": "OUT.DE015",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.DateTime",
+            "params": "MMdd"
+        },
+        {
+            "name": "RULE-MADA_DE004",
+            "description": "Generate DE004 Field value",
+            "type": "Custom",
+            "dest": "OUT.DE004",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.MBI_DE004_Processor"
+        },
+        {
+            "name": "RULE-MADA_DE030",
+            "description": "Generate DE030 Field value",
+            "type": "Custom",
+            "dest": "OUT.DE030",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.MBI_DE030_Processor"
+        },
+        {
+            "name": "RULE-MADA_DE038",
+            "description": "Set the Approval Code (mada) if transaction approved",
+            "type": "Regex_Compare",
+            "source": "OUT.DE039",
+            "params": "^0.*$",
+            "IfOKRule": "MADA_DE038_RANDOM_VALUE"
+        },
+        {
+            "name": "RULE-MADA_MULTIPLE_CURRENCY_DE005",
+            "description": "Multiple Currency  manager",
+            "type": "Custom",
+            "dest": "OUT.DE005",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=682|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-MADA_MULTIPLE_CURRENCY_DE009",
+            "description": "Multiple Currency  manager",
+            "type": "Custom",
+            "dest": "OUT.DE009",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=682|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-MADA_MULTIPLE_CURRENCY_DE050",
+            "description": "Multiple Currency  manager",
+            "type": "Custom",
+            "dest": "OUT.DE050",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=682|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-MASTERCARD_DE016",
+            "description": "Apply Convertion Time",
+            "type": "Regex_Compare",
+            "source": "IN.DE049",
+            "params": "^(0840)$",
+            "IfOKRule": "DATE_TIME_MMDD_DE016"
+        },
+        {
+            "name": "RULE-MASTERCARD_DE038",
+            "description": "Apply DE038 Incrementor if it is present (if DE039 is like ^(00|08|10|85|87)$)",
+            "type": "Regex_Compare",
+            "source": "OUT.DE039",
+            "params": "^(00|08|10|85|87)$"
+        },
+        {
+            "name": "RULE-MASTERCARD_DE054",
+            "description": "DE054 - Partial Approval/Balance inquiry (if DE039 is like ^10$)",
+            "type": "Regex_Compare",
+            "source": "OUT.DE039",
+            "params": "^10$",
+            "IfOKRule": "MASTERCARD_DE054"
+        },
+        {
+            "name": "RULE-MASTERCARD_DE063",
+            "description": "Set Network Data into DE063",
+            "type": "Custom",
+            "dest": "OUT.DE063",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.MC_DE063"
+        },
+        {
+            "name": "RULE-MASTERCARD_MULTIPLE_CURRENCY_DE005",
+            "description": "Multiple Currency  manager for DE005 (Mastercard)",
+            "type": "Custom",
+            "dest": "OUT.DE005",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-MASTERCARD_MULTIPLE_CURRENCY_DE006",
+            "description": "Multiple Currency  manager for DE006 (Mastercard)",
+            "type": "Custom",
+            "dest": "OUT.DE006",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-MASTERCARD_MULTIPLE_CURRENCY_DE009",
+            "description": "Multiple Currency  manager for DE009 (Mastercard)",
+            "type": "Custom",
+            "dest": "OUT.DE009",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-MASTERCARD_MULTIPLE_CURRENCY_DE010",
+            "description": "Multiple Currency  manager for DE010 (Mastercard)",
+            "type": "Custom",
+            "dest": "OUT.DE010",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-MASTERCARD_MULTIPLE_CURRENCY_DE050",
+            "description": "Multiple Currency  manager for DE050 (Mastercard)",
+            "type": "Custom",
+            "dest": "OUT.DE050",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-MASTERCARD_MULTIPLE_CURRENCY_DE051",
+            "description": "Multiple Currency  manager for DE051 (Mastercard)",
+            "type": "Custom",
+            "dest": "OUT.DE051",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-UPI_DE014",
+            "description": "Extract  Expiration date from Track2",
+            "type": "Custom",
+            "dest": "OUT.DE014",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.ExtractExpDatefromTrack2",
+            "params": "yyMM"
+        },
+        {
+            "name": "RULE-UPI_DE038",
+            "description": "Apply DE038 Incrementor if it is present (if DE039 is like ^00$)",
+            "type": "Regex_Compare",
+            "source": "OUT.DE039",
+            "params": "^00$",
+            "IfOKRule": "UPI_DE038"
+        },
+        {
+            "name": "RULE-UPI_MULTIPLE_CURRENCY_DE006",
+            "description": "Multiple Currency  manager for DE006 (UPI)",
+            "type": "Custom",
+            "dest": "OUT.DE006",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=156|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-UPI_MULTIPLE_CURRENCY_DE010",
+            "description": "Multiple Currency  manager for DE010 (UPI)",
+            "type": "Custom",
+            "dest": "OUT.DE010",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=156|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-UPI_MULTIPLE_CURRENCY_DE051",
+            "description": "Multiple Currency  manager for DE050 (UPI)",
+            "type": "Custom",
+            "dest": "OUT.DE050",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=156|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-VISA_DE016",
+            "description": "Apply Convertion Time",
+            "type": "Regex_Compare",
+            "source": "IN.DE049",
+            "params": "^(0840)$",
+            "IfOKRule": "DATE_TIME_MMDD_DE016"
+        },
+        {
+            "name": "RULE-VISA_MULTIPLE_CURRENCY_DE005",
+            "description": "Multiple Currency  manager for DE005 (VISA)",
+            "type": "Custom",
+            "dest": "OUT.DE005",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-VISA_MULTIPLE_CURRENCY_DE006",
+            "description": "Multiple Currency  manager for DE006 (VISA)",
+            "type": "Custom",
+            "dest": "OUT.DE006",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-VISA_MULTIPLE_CURRENCY_DE009",
+            "description": "Multiple Currency  manager for DE009 (VISA)",
+            "type": "Custom",
+            "dest": "OUT.DE009",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-VISA_MULTIPLE_CURRENCY_DE010",
+            "description": "Multiple Currency  manager for DE010 (VISA)",
+            "type": "Custom",
+            "dest": "OUT.DE010",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-VISA_MULTIPLE_CURRENCY_DE050",
+            "description": "Multiple Currency  manager for DE011 (VISA)",
+            "type": "Custom",
+            "dest": "OUT.DE011",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-VISA_MULTIPLE_CURRENCY_DE051",
+            "description": "Multiple Currency  manager for DE050 (VISA)",
+            "type": "Custom",
+            "dest": "OUT.DE050",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.SingleOrMultipleCurrency",
+            "params": "applicability=TRUE;Currency=840|CurrencyField=IN.DE049"
+        },
+        {
+            "name": "RULE-VISA-DE038",
+            "description": "Apply DE038 Incrementor if it is present",
+            "type": "Check_Presence",
+            "source": "OUT.DE038",
+            "IfOKRule": "INCREMENTOR_DE038"
+        },
+        {
+            "name": "UPI_ARPC_GENERATION",
+            "description": "UPI ARPC Generation",
+            "type": "Custom",
+            "dest": "OUT.DE055",
+            "copyMode": "Append",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.UP_Arpc",
+            "params": "applicability=TRUE;CVN=AUTO|ARC=0012"
+        },
+        {
+            "name": "UPI_ARQC_VALIDATION",
+            "description": "UPI ARQC Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.UP_Arqc",
+            "params": "applicability=TRUE;CVN=AUTO"
+        },
+        {
+            "name": "UPI_DE038",
+            "description": "Apply DE038 Incrementor if it is present",
+            "type": "Check_Presence",
+            "source": "OUT.DE038",
+            "IfOKRule": "INCREMENTOR_DE038"
+        },
+        {
+            "name": "UPI_DE039_12",
+            "description": "Set 12 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.12",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "UPI_DE039_64",
+            "description": "Set 64 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.64",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "UPI_MAC_GENERATION"
+        },
+        {
+            "name": "UPI_PIN_VALIDATION",
+            "description": "UPI PIN Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.PIN_Validation",
+            "params": "applicability=TRUE;PIN_value=1234|key=OUT.DE039|keyvalue_fail=117"
+        },
+        {
+            "name": "VISA_ARPC_GENERATION",
+            "description": "VISA ARPC Generation",
+            "type": "Custom",
+            "dest": "OUT.DE055",
+            "copyMode": "Append",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Visa_Arpc",
+            "params": "applicability=TRUE;CVN=AUTO|ARC_CVN_0A_11=3030|ARC_CVN_12_22=00800000"
+        },
+        {
+            "name": "VISA_ARQC_VALIDATION",
+            "description": "VISA ARQC Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Visa_Arqc",
+            "params": "applicability=TRUE;CVN=AUTO|key1=OUT.DE048.SE05|key2=OUT.DE048.SE08|key3=OUT.DE039"
+        },
+        {
+            "name": "VISA_DE039_12",
+            "description": "Set 12 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.12",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "VISA_DE039_21",
+            "description": "Set 21 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.21",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "VISA_DE039_39",
+            "description": "Set 39 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.39",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "VISA_DE039_41",
+            "description": "Set 41 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.41",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "VISA_DE039_59",
+            "description": "Set 59 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.59",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "VISA_DE039_63",
+            "description": "Set 63 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.63",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "VISA_DE039_76",
+            "description": "Set 76 into DE039 Field",
+            "type": "Copy",
+            "source": "CONST.76",
+            "dest": "OUT.DE039"
+        },
+        {
+            "name": "VISA_PIN_VALIDATION",
+            "description": "VISA PIN Validation",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.PIN_Validation",
+            "params": "applicability=TRUE;PIN_value=1234|key=OUT.DE039|keyvalue_fail=117"
+        },
+        {
+            "name": "VISA_STANDIN_RULE",
+            "description": "Apply the VISA Standin Rules",
+            "type": "Custom",
+            "customProcessor": "FIME.TERRA.HOST.Core.CustomProcessor.Visa_StandinProcessor",
+            "params": "applicability=true;TVR_decline=4860B80800|CVR_decline=00024000|key1=OUT.DE039|key2=OUT.DE044.SE01|key2value=4"
+        }
+    ]
+}

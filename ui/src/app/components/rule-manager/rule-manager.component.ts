@@ -13,33 +13,42 @@ export class RuleManagerComponent implements OnInit {
   submitted = false;
   cols: any[] = [
     // { field: '_id', header: 'Id' },
-    { field: 'name', header: 'Name' },
-    { field: 'description', header: 'Description' },
-    { field: 'type', header: 'Type' },
-    { field: 'source', header: 'Source' },
-    { field: 'dest', header: 'Destination' },
-    { field: 'format', header: 'Format' },
-    { field: 'copyMode', header: 'CopyMode' },
-    { field: 'customProcessor', header: 'CustomProcessor' },
-    { field: 'params', header: 'Params' },
-    { field: 'ifOkRule', header: 'IfOkRule' },
-    { field: 'ifNotOkRule', header: 'IfNotOkRule' }
+    { field: 'name', header: 'Name', type: 'text' },
+    { field: 'description', header: 'Description', type: 'text' },
+    { field: 'type', header: 'Type', type: 'select' },
+    { field: 'source', header: 'Source', type: 'text' },
+    { field: 'dest', header: 'Destination', type: 'text' },
+    // { field: 'format', header: 'Format', type: 'text' },
+    { field: 'copyMode', header: 'CopyMode', type: 'select' },
+    { field: 'customProcessor', header: 'CustomProcessor', type: 'multi' },
+    { field: 'params', header: 'Params', type: 'text' },
+    { field: 'ifOkRule', header: 'IfOkRule', type: 'text' },
+    { field: 'ifNotOkRule', header: 'IfNotOkRule', type: 'text' }
   ];
   rules: any[];
-
-  availableCopyModes: any[] = [
-    { label: 'Append', value:'APPEND' },
-    { label: 'Create Or Replace', value: 'CREATE_OR_REPLACE'}
-  ];
-  availableUpdateModes: string[] = ['APPEND', 'CREATE_OR_REPLACE'];
-  availableCustomProcessors: any[];
+  itemList: any = {
+    customProcessor: []
+  };
+  optionList: any = {
+    type: [
+      { label: 'Custom', value:'Custom' },
+      { label: 'Copy', value: 'Copy'},
+      { label: 'Regex Compare', value: 'Regex_Compare'},
+      { label: 'Check Presence', value: 'Check_Presence'},
+    ],
+    copyMode: [
+      { label: 'Append', value:'APPEND' },
+      { label: 'Create Or Replace', value: 'CREATE_OR_REPLACE'}
+    ]
+  };
 
   constructor(private router: Router, private ngZone: NgZone, private apiService: ApiService) {
   }
 
   ngOnInit() {
-    this.apiService.getResponseProfiles().subscribe(
+    this.apiService.getRules().subscribe(
       (res: any[]) => {
+        this.rules = res;
         console.log(res);
       },
       (error: object) => {
@@ -47,21 +56,21 @@ export class RuleManagerComponent implements OnInit {
       }
     );
 
-    this.rules = [
-      {
-        name: 'Rule 1',
-        description: 'desc 1',
-        type: 'REFERENCE',
-        source: 'IN.EEE',
-        dest: 'OUT.EEE',
-        format: '',
-        copyMode: 'APPEND',
-        customProcessor: ['custom1'],
-        params: 'applicability...',
-        ifOkRules: ['RULE091'],
-        ifNotOkRules: ['RULE000']
-      }
-    ]
+    // this.rules = [
+    //   {
+    //     name: 'Rule 1',
+    //     description: 'desc 1',
+    //     type: 'REFERENCE',
+    //     source: 'IN.EEE',
+    //     dest: 'OUT.EEE',
+    //     format: '',
+    //     copyMode: 'APPEND',
+    //     customProcessor: ['custom1'],
+    //     params: 'applicability...',
+    //     ifOkRules: ['RULE091'],
+    //     ifNotOkRules: ['RULE000']
+    //   }
+    // ]
   }
 
   submit() {
