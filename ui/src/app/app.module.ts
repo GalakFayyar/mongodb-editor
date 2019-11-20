@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { environment } from '@env/environment';
 import { CoreModule } from '@app/core';
@@ -49,6 +51,8 @@ import { ApiService } from './service/api.service';
     TableModule,
     DropdownModule,
     NgSelectModule,
+    MultiSelectModule,
+    TooltipModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [

@@ -1,0 +1,10 @@
+.overflow-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+.tooltip-info {
+  max-width: 100%;
+  display: inline-block;
+}

@@ -1,25 +1,38 @@
 <div class="row justify-content">
     <!-- form card register -->
     <div class="card-body">
-        <p-table [columns]="cols" [value]="rules" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="rules" [paginator]="true" [rows]="7">
+            <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
+            </ng-template>
+
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns">
+                    <th *ngFor="let col of columns" [style.width]="col.width">
                         {{col.header}}
                     </th>
                 </tr>
+                <tr>
+                    <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                        <p-multiSelect *ngIf="col.filterable" [options]="filterOptions(col.field)" defaultLabel="All values" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+                    </th>
+                </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td pEditableColumn *ngFor="let col of columns" [style.width]="col.width">
+                    <td pEditableColumn *ngFor="let col of columns" [style.width]="col.width" class="overflow-cell">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input *ngIf="col.type=='text'" type="text" [(ngModel)]="rowData[col.field]" [(value)]="rowData[col.field]" />
-                                <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.field]" [(ngModel)]="rowData[col.field]" [closeOnSelect]="false" [addTag]="true"></ng-select>
-                                <p-dropdown *ngIf="col.type=='select'" [options]="optionList[col.field]" [(ngModel)]="rowData.copyMode"></p-dropdown>
+                                <input *ngIf="col.type=='text'" type="text" [(ngModel)]="rowData[col.field]" [(value)]="rowData[col.field]"/>
+                                <ng-select *ngIf="col.type=='multi'" appendTo="body" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.field]" [(ngModel)]="rowData[col.field]" [closeOnSelect]="false" [addTag]="true"></ng-select>
+                                <p-dropdown *ngIf="col.type=='select'" [options]="optionList[col.field]" [(ngModel)]="rowData[col.field]"></p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
-                                <span *ngIf="col.type=='text' || col.type=='select'">{{ rowData[col.field] }}</span>
+                                <span *ngIf="col.type=='text' || col.type=='select'" [pTooltip]="rowData[col.field]" tooltipPosition="bottom" tooltipStyleClass="tooltip-info">{{ rowData[col.field] }}</span>
                                 <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.field]" [(ngModel)]="rowData[col.field]" disabled></ng-select>
                             </ng-template>
                         </p-cellEditor>

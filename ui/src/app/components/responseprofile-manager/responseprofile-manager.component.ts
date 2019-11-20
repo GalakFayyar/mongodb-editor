@@ -15,14 +15,15 @@ export class ResponseProfileManagerComponent implements OnInit {
   responseProfileForm: FormGroup;
   Brands: any = ['Mastercard', 'VISA', 'mada', 'UPI', 'GCCNET', 'AMEX'];
   deFields: any = [];
+  rules: any[];
   responseProfiles: any[] = [];
   scrollableColumns: any[] = [
     { field: 'responseType', header: 'Response Type', width: '150px', type: 'text' },
   ];
   frozenColumns: any[] = [
     { field: 'name', width: '300px', header: 'Name', type: 'text' },
-    { field: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
-    { field: 'specific', header: 'Specific', width: '250px', type: 'multi' },
+    { field: 'matchingCriteria', dataSrc: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
+    { field: 'specific', dataSrc: 'specific', header: 'Specific', width: '250px', type: 'multi' },
   ];
 
   itemList: any = {
@@ -37,7 +38,8 @@ export class ResponseProfileManagerComponent implements OnInit {
       'GCCNET_PIN_VALIDATION',
       'GCCNET_ARQC_VALIDATION',
       'GCCNET_ARPC_GENERATION'
-    ]
+    ],
+    fieldOperation: []
   }
 
   constructor(public fb: FormBuilder, private router: Router, private ngZone: NgZone, private apiService: ApiService) {
@@ -45,9 +47,26 @@ export class ResponseProfileManagerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.apiService.getRules().subscribe(
+      (res: any[]) => {
+        console.log('Rules:', res);
+        this.rules = res;
+        this.itemList.fieldOperation =  this.rules.map(rule => {
+          return { label: rule.name, value: rule.name }
+        });
+        this.itemList.fieldOperation.push({
+          label: 'Copy', value: 'Copy'
+        });
+        console.log('FieldOperation:', this.itemList.fieldOperation);
+      },
+      (error: object) => {
+        console.log(error);
+      }
+    );
+
     this.apiService.getResponseProfiles().subscribe(
       (res: any[]) => {
-        console.log(res);
+        console.log('Response Profiles:', res);
         this.responseProfiles = res;
       },
       (error: object) => {
@@ -59,8 +78,9 @@ export class ResponseProfileManagerComponent implements OnInit {
       this.scrollableColumns.push({
         field: 'DE' + i.toString().padStart(3, '0'),
         header: 'DE' + i.toString().padStart(3, '0'),
-        type: 'text',
-        width: '150px'
+        type: 'select',
+        dataSrc: 'fieldOperation',
+        width: '215px'
       });
     }
   }

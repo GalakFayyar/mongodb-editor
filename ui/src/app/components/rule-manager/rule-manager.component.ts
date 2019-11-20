@@ -13,14 +13,14 @@ export class RuleManagerComponent implements OnInit {
   submitted = false;
   cols: any[] = [
     // { field: '_id', header: 'Id' },
-    { field: 'name', header: 'Name', type: 'text' },
+    { field: 'name', header: 'Name', type: 'text', filterable: true },
     { field: 'description', header: 'Description', type: 'text' },
-    { field: 'type', header: 'Type', type: 'select' },
-    { field: 'source', header: 'Source', type: 'text' },
-    { field: 'dest', header: 'Destination', type: 'text' },
+    { field: 'type', header: 'Type', type: 'select', filterable: true },
+    { field: 'source', header: 'Source', type: 'text', filterable: true },
+    { field: 'dest', header: 'Destination', type: 'text', filterable: true },
     // { field: 'format', header: 'Format', type: 'text' },
-    { field: 'copyMode', header: 'CopyMode', type: 'select' },
-    { field: 'customProcessor', header: 'CustomProcessor', type: 'multi' },
+    { field: 'copyMode', header: 'CopyMode', type: 'select', filterable: true },
+    { field: 'customProcessor', header: 'CustomProcessor', width: '250px', type: 'multi' },
     { field: 'params', header: 'Params', type: 'text' },
     { field: 'ifOkRule', header: 'IfOkRule', type: 'text' },
     { field: 'ifNotOkRule', header: 'IfNotOkRule', type: 'text' }
@@ -55,22 +55,25 @@ export class RuleManagerComponent implements OnInit {
         console.log(error);
       }
     );
+  }
 
-    // this.rules = [
-    //   {
-    //     name: 'Rule 1',
-    //     description: 'desc 1',
-    //     type: 'REFERENCE',
-    //     source: 'IN.EEE',
-    //     dest: 'OUT.EEE',
-    //     format: '',
-    //     copyMode: 'APPEND',
-    //     customProcessor: ['custom1'],
-    //     params: 'applicability...',
-    //     ifOkRules: ['RULE091'],
-    //     ifNotOkRules: ['RULE000']
-    //   }
-    // ]
+  filterOptions(field: string) {
+    let arrayOfFilter: any[] = [];
+
+    if (this.rules != null) {
+      const listElements = this.rules.map(rule => rule[field]);
+      let distinctElements = [...new Set(listElements)];
+      distinctElements = distinctElements.filter(elt => elt !== undefined);
+
+      distinctElements.forEach(element => {
+        arrayOfFilter.push({
+          label: element,
+          value: element
+        });
+      });
+    }
+
+    return arrayOfFilter;
   }
 
   submit() {
