@@ -6,7 +6,7 @@
             </div>
             <select class="custom-select form-control" (change)="updateBrand($event.target.value)" aria-describedby="brand-label">
               <option value="">Select a brand...</option>
-              <option *ngFor="let brand of Brands" value="{{ brand }}">{{ brand }}</option>
+              <option *ngFor="let brand of itemList.brands" value="{{ brand }}">{{ brand }}</option>
             </select>
         </div>
 
@@ -27,26 +27,30 @@
 
     <div class="row">
         <p-table
-        class="col-md-12"
+        #dt
+        class="col-md-12 tab-response-profiles"
+        [loading]="loading"
         [value]="responseProfiles"
         [paginator]="true"
         [rows]="5"
         [scrollable]="true"
         [columns]="scrollableColumns"
         [frozenColumns]="frozenColumns"
-        frozenWidth="800px">
+        frozenWidth="700px">
 
-          <ng-template pTemplate="colgroup" let-columns>
+          <!-- <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                   <col *ngFor="let col of columns" [pSortableColumn]="col.field">
               </colgroup>
-          </ng-template>
+          </ng-template> -->
 
           <ng-template pTemplate="header" let-columns>
-              <tr style="height:80px;">
-                  <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
+              <tr style="height:20px;">
+                  <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.sortable ? col.field : null">
                       {{col.header}}
-                      <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                      <p-sortIcon *ngIf="col.sortable" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                      <!-- <p-multiSelect *ngIf="col.filterable" appendTo="body" [options]="filterOptions(col.field)" defaultLabel="All values" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect> -->
+                      <input *ngIf="col.searchable" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                   </th>
               </tr>
           </ng-template>
@@ -57,12 +61,14 @@
                       <p-cellEditor>
                           <ng-template pTemplate="input">
                               <input *ngIf="col.type=='text'" type="text" [(ngModel)]="rowData[col.field]" [(value)]="rowData[col.field]" />
-                              <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.field]" [(ngModel)]="rowData[col.field]" [closeOnSelect]="false" [addTag]="true"></ng-select>
-                              <p-dropdown *ngIf="col.type=='select'" [options]="itemList[col.dataSrc]" [(ngModel)]="itemList[col.field]" filter="true"></p-dropdown>
+                              <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.dataSrc]" [(ngModel)]="rowData[col.field]" [closeOnSelect]="false" [addTag]="true"></ng-select>
+                              <!-- <p-dropdown *ngIf="col.type=='select'" [options]="itemList[col.dataSrc]" [(ngModel)]="itemList[col.field]" filter="true"></p-dropdown> -->
+                              <ng-select *ngIf="col.type=='select'" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.dataSrc]" [(ngModel)]="rowData[col.field]" [closeOnSelect]="true"></ng-select>
                           </ng-template>
                           <ng-template pTemplate="output">
-                              <span *ngIf="col.type=='text' || col.type=='select'">{{ rowData[col.field] }}</span>
-                              <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.field]" [(ngModel)]="rowData[col.field]" disabled></ng-select>
+                              <span *ngIf="col.type=='text'">{{ rowData[col.field] }}</span>
+                              <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.dataSrc]" [(ngModel)]="rowData[col.field]" disabled></ng-select>
+                              <ng-select *ngIf="col.type=='select'" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.dataSrc]" [(ngModel)]="rowData[col.field]" disabled></ng-select>
                           </ng-template>
                       </p-cellEditor>
                   </td>

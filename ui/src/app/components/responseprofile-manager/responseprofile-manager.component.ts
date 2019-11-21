@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { ApiService } from '../../service/api.service';
-import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, NgZone, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseProfile } from '@app/model/response-profile';
 
@@ -11,35 +11,36 @@ import { ResponseProfile } from '@app/model/response-profile';
   encapsulation: ViewEncapsulation.None
 })
 export class ResponseProfileManagerComponent implements OnInit {
+
+  // Getter to access form control
+  get myForm() {
+    return this.responseProfileForm.controls;
+  }
   submitted = false;
+  loading: boolean;
   responseProfileForm: FormGroup;
-  Brands: any = ['Mastercard', 'VISA', 'mada', 'UPI', 'GCCNET', 'AMEX'];
   deFields: any = [];
   rules: any[];
   responseProfiles: any[] = [];
   scrollableColumns: any[] = [
-    { field: 'responseType', header: 'Response Type', width: '150px', type: 'text' },
+    { field: 'specific', dataSrc: 'rules', header: 'Specific', width: '250px', type: 'multi' },
+    { field: 'responseType', dataSrc: 'responseTypes', header: 'Type', width: '150px', type: 'select' },
+    { field: 'testPlan', dataSrc: 'testPlans', header: 'Test Plan', width: '250px', type: 'select' },
   ];
   frozenColumns: any[] = [
-    { field: 'name', width: '300px', header: 'Name', type: 'text' },
+    { field: 'name', sortable: false, searchable: true, width: '300px', header: 'Name', type: 'text' },
+    { field: 'protocol', sortable: true, dataSrc: 'protocols', width: '150px', header: 'Protocol', type: 'select' },
     { field: 'matchingCriteria', dataSrc: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
-    { field: 'specific', dataSrc: 'specific', header: 'Specific', width: '250px', type: 'multi' },
   ];
 
   itemList: any = {
     machingCriteria: ['IN->MTI=^1100$', 'IN->MTI=^1200$'],
-    specific: [
-      'MADA_PIN_VALIDATION',
-      'MADA_ARQC_VALIDATION',
-      'MADA_ARPC_GENERATION',
-      'MC_PIN_VALIDATION',
-      'MC_ARQC_VALIDATION',
-      'MC_ARPC_GENERATION',
-      'GCCNET_PIN_VALIDATION',
-      'GCCNET_ARQC_VALIDATION',
-      'GCCNET_ARPC_GENERATION'
-    ],
-    fieldOperation: []
+    rules: [],
+    responseTypes: ['REFERENCE', 'DEFAULT', 'TEMPLATE', 'POSTPROCESSOR',],
+    protocols: ['MASTERCARD', 'VISA', 'MADA', 'UPI', 'GCCNET', 'AMEX'],
+    brands: ['MASTERCARD', 'VISA', 'MADA', 'UPI', 'GCCNET', 'AMEX'],
+    fieldOperation: [],
+    testPlans: []
   }
 
   constructor(public fb: FormBuilder, private router: Router, private ngZone: NgZone, private apiService: ApiService) {
@@ -47,17 +48,18 @@ export class ResponseProfileManagerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
+
     this.apiService.getRules().subscribe(
       (res: any[]) => {
-        console.log('Rules:', res);
         this.rules = res;
+
+        this.itemList.rules =  this.rules.map(rule => rule.name);
+
         this.itemList.fieldOperation =  this.rules.map(rule => {
           return { label: rule.name, value: rule.name }
         });
-        this.itemList.fieldOperation.push({
-          label: 'Copy', value: 'Copy'
-        });
-        console.log('FieldOperation:', this.itemList.fieldOperation);
+        this.itemList.fieldOperation.push({ label: 'Copy', value: 'COPY' });
       },
       (error: object) => {
         console.log(error);
@@ -67,7 +69,15 @@ export class ResponseProfileManagerComponent implements OnInit {
     this.apiService.getResponseProfiles().subscribe(
       (res: any[]) => {
         console.log('Response Profiles:', res);
+
+        const listTestPlans = res.map(responseProfile => responseProfile.testPlan);
+
+        this.itemList.testPlans = [...new Set(listTestPlans)];
+        this.itemList.testPlans = this.itemList.testPlans.filter((elt: any) => elt !== undefined);
+        console.log('this.itemList.testPlans: ', this.itemList.testPlans);
         this.responseProfiles = res;
+
+        this.loading = false;
       },
       (error: object) => {
         console.log(error);
@@ -100,9 +110,23 @@ export class ResponseProfileManagerComponent implements OnInit {
     });
   }
 
-  // Getter to access form control
-  get myForm() {
-    return this.responseProfileForm.controls;
+  filterOptions(field: string) {
+    const arrayOfFilter: any[] = [];
+
+    if (this.responseProfiles != null) {
+      const listElements = this.responseProfiles.map(responseProfile => responseProfile[field]);
+      let distinctElements = [...new Set(listElements)];
+      distinctElements = distinctElements.filter(elt => elt !== undefined);
+
+      distinctElements.forEach(element => {
+        arrayOfFilter.push({
+          label: element,
+          value: element
+        });
+      });
+    }
+
+    return arrayOfFilter;
   }
 
   submit() {

@@ -20,7 +20,7 @@ export class RuleManagerComponent implements OnInit {
     { field: 'dest', header: 'Destination', type: 'text', filterable: true },
     // { field: 'format', header: 'Format', type: 'text' },
     { field: 'copyMode', header: 'CopyMode', type: 'select', filterable: true },
-    { field: 'customProcessor', header: 'CustomProcessor', width: '250px', type: 'multi' },
+    { field: 'customProcessor', header: 'CustomProcessor', width: '300px', type: 'multi' },
     { field: 'params', header: 'Params', type: 'text' },
     { field: 'ifOkRule', header: 'IfOkRule', type: 'text' },
     { field: 'ifNotOkRule', header: 'IfNotOkRule', type: 'text' }
