@@ -25,6 +25,54 @@
         </div>
     </div>
 
+    <div class="card card-body">
+      <div class="form-group row">
+        <div class="input-group input-group-sm col-sm">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="filter-name">Name</span>
+          </div>
+          <input type="text" class="form-control" (change)="dt.filter($event.target.value, 'name', 'contains')" aria-label="Name" aria-describedby="filter-name" />
+        </div>
+
+        <div class="input-group input-group-sm col-sm">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="filter-card">Card profile</span>
+          </div>
+          <input type="text" class="form-control" (change)="dt.filter($event.target.value, 'card', 'contains')" aria-label="Card" aria-describedby="filter-card" />
+        </div>
+
+        <div class="input-group input-group-sm col-sm">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="filter-type">Type</span>
+          </div>
+          <select class="custom-select form-control" (change)="dt.filter($event.target.value, 'responseType', 'contains')" aria-describedby="filter-type">
+            <option value="">Select a type...</option>
+            <option *ngFor="let type of itemList.types" value="{{ type }}">{{ type }}</option>
+          </select>
+        </div>
+
+        <div class="input-group input-group-sm col-sm">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="filter-protocol">Protocol</span>
+          </div>
+          <select class="custom-select form-control" (change)="dt.filter($event.target.value, 'protocol', 'contains')" aria-describedby="filter-protocol">
+            <option value="">Select a protocol...</option>
+            <option *ngFor="let protocol of itemList.protocols" value="{{ protocol }}">{{ protocol }}</option>
+          </select>
+        </div>
+
+        <div class="input-group input-group-sm col-sm">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="filter-test-plan">Test Plan</span>
+          </div>
+          <select class="custom-select form-control" (change)="dt.filter($event.target.value, 'testPlan', 'contains')" aria-describedby="filter-test-plan">
+            <option value="">Select a test plan...</option>
+            <option *ngFor="let testPlan of itemList.testPlans" value="{{ testPlan }}">{{ testPlan }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
         <p-table
         #dt
@@ -38,19 +86,11 @@
         [frozenColumns]="frozenColumns"
         frozenWidth="700px">
 
-          <!-- <ng-template pTemplate="colgroup" let-columns>
-              <colgroup>
-                  <col *ngFor="let col of columns" [pSortableColumn]="col.field">
-              </colgroup>
-          </ng-template> -->
-
           <ng-template pTemplate="header" let-columns>
               <tr style="height:20px;">
                   <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.sortable ? col.field : null">
                       {{col.header}}
                       <p-sortIcon *ngIf="col.sortable" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-                      <!-- <p-multiSelect *ngIf="col.filterable" appendTo="body" [options]="filterOptions(col.field)" defaultLabel="All values" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect> -->
-                      <input *ngIf="col.searchable" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                   </th>
               </tr>
           </ng-template>

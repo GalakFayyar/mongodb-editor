@@ -26,6 +26,7 @@ export class ResponseProfileManagerComponent implements OnInit {
     { field: 'specific', dataSrc: 'rules', header: 'Specific', width: '250px', type: 'multi' },
     { field: 'responseType', dataSrc: 'responseTypes', header: 'Type', width: '150px', type: 'select' },
     { field: 'testPlan', dataSrc: 'testPlans', header: 'Test Plan', width: '250px', type: 'select' },
+    { field: 'card', header: 'Card', width: '250px', type: 'text' },
   ];
   frozenColumns: any[] = [
     { field: 'name', sortable: false, searchable: true, width: '300px', header: 'Name', type: 'text' },
@@ -35,9 +36,10 @@ export class ResponseProfileManagerComponent implements OnInit {
 
   itemList: any = {
     machingCriteria: ['IN->MTI=^1100$', 'IN->MTI=^1200$'],
+    types: ['REFERENCE', 'CUSTOM', 'DEFAULT', 'POSTPROCESSOR'],
     rules: [],
     responseTypes: ['REFERENCE', 'DEFAULT', 'TEMPLATE', 'POSTPROCESSOR',],
-    protocols: ['MASTERCARD', 'VISA', 'MADA', 'UPI', 'GCCNET', 'AMEX'],
+    protocols: ['MASTERCARD', 'VISA', 'MBI', 'EFTPOS', 'UPI', 'GCCNET', 'AMEX'],
     brands: ['MASTERCARD', 'VISA', 'MADA', 'UPI', 'GCCNET', 'AMEX'],
     fieldOperation: [],
     testPlans: []
