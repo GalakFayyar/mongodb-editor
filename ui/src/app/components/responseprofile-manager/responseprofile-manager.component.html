@@ -80,10 +80,11 @@
         [loading]="loading"
         [value]="responseProfiles"
         [paginator]="true"
-        [rows]="5"
+        [rows]="4"
         [scrollable]="true"
         [columns]="scrollableColumns"
         [frozenColumns]="frozenColumns"
+        (onFilter)="onFilter($event, dt)"
         frozenWidth="700px">
 
           <ng-template pTemplate="header" let-columns>
@@ -114,6 +115,10 @@
                   </td>
               </tr>
           </ng-template>
+
+          <ng-template pTemplate="summary">
+            {{filteredValuesLength}} Response Profiles
+        </ng-template>
       </p-table>
     </div>
 

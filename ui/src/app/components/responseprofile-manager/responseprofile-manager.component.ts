@@ -20,6 +20,7 @@ export class ResponseProfileManagerComponent implements OnInit {
   loading: boolean;
   responseProfileForm: FormGroup;
   deFields: any = [];
+  filteredValuesLength: number;
   rules: any[];
   responseProfiles: any[] = [];
   scrollableColumns: any[] = [
@@ -79,6 +80,8 @@ export class ResponseProfileManagerComponent implements OnInit {
         console.log('this.itemList.testPlans: ', this.itemList.testPlans);
         this.responseProfiles = res;
 
+        this.filteredValuesLength = this.responseProfiles.length;
+
         this.loading = false;
       },
       (error: object) => {
@@ -129,6 +132,10 @@ export class ResponseProfileManagerComponent implements OnInit {
     }
 
     return arrayOfFilter;
+  }
+
+  onFilter(event: any, dt: any) {
+    this.filteredValuesLength = event.filteredValue.length; // count of displayed rows
   }
 
   submit() {
