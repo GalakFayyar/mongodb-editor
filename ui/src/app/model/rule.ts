@@ -1,15 +1,15 @@
 export class Rule {
   _id: string;
-  name: string;
-  description: string;
-  type: string;
-  source: string;
-  dest: string;
-  format: string;
-  copyMode: string;
-  customProcessor: string;
-  params: string;
+  Name: string;
+  Description: string;
+  Type: string;
+  Source: string;
+  Dest: string;
+  Format: string;
+  CopyMode: string;
+  CustomProcessor: string;
+  Params: string;
   // updateMode: string;
-  ifOkRules: string[];
-  ifNotOkRules: string[];
+  IfOkRules: string[];
+  IfNotOkRules: string[];
 }

@@ -6,41 +6,41 @@ let Rule = new Schema({
     _id: {
         type: String
     },
-    name: {
+    Name: {
         type: String
     },
-    description: {
+    Description: {
         type: String
     },
-    type: {
+    Type: {
         type: String
     },
-    source: {
+    Source: {
         type: String
     },
-    dest: {
+    Dest: {
         type: String
     },
-    format: {
+    Format: {
         type: String
     },
-    copyMode: {
+    CopyMode: {
         type: String
     },
-    customProcessor: {
+    CustomProcessor: {
         type: []
     },
-    params: {
+    Params: {
         type: String
     },
-    ifOkRules: {
+    IfOkRules: {
         type: []
     },
-    ifNotOkRules: {
+    IfNotOkRules: {
         type: []
     },
 }, {
-    collection: 'rules'
+    collection: 'Rules'
 });
 
 // Avoid deprecated methods

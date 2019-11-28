@@ -31,7 +31,7 @@ export class ResponseProfileManagerComponent implements OnInit {
   ];
   frozenColumns: any[] = [
     { field: 'name', sortable: false, searchable: true, width: '300px', header: 'Name', type: 'text' },
-    { field: 'protocol', sortable: true, dataSrc: 'protocols', width: '150px', header: 'Protocol', type: 'select' },
+    { field: 'protocol', sortable: false, dataSrc: 'protocols', width: '150px', header: 'Protocol', type: 'select' },
     { field: 'matchingCriteria', dataSrc: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
   ];
 

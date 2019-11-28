@@ -20,6 +20,7 @@ mongoose.connect(dbConfig.db, {
 // Setting up port with express js
 const responseProfileRoute = require('../bk/routes/responseprofile.route');
 const ruleRoute = require('../bk/routes/rule.route');
+const converterRoute = require('../bk/routes/converter.route');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
 app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
 app.use('/api/responseprofiles', responseProfileRoute);
 app.use('/api/rules', ruleRoute);
+app.use('/api/converters', converterRoute);
 
 // Create port
 const port = process.env.PORT || 4000;

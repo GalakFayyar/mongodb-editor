@@ -6,7 +6,7 @@ db = client['terraData']
 
 
 
-collection = db['rules']
+collection = db['Rules']
 collection.drop()
 with open('data/rules.json') as f:
     file_data = json.load(f)
@@ -30,6 +30,18 @@ for doc in file_data['responseProfiles']:
     collection.insert_one(doc)
 print("Done.")
 
+
+
+collection = db['Converters']
+collection.drop()
+with open('data/converters.json') as f:
+    file_data = json.load(f)
+
+print("Import of Converters...")
+for doc in file_data['Converters']:
+    # use collection_currency.insert(file_data) if pymongo version < 3.0
+    collection.insert_one(doc)
+print("Done.")
 
 
 client.close()

@@ -85,6 +85,42 @@ export class ApiService {
     return this.http.delete(url, { headers: this.headers }).pipe(catchError(this.errorMgmt));
   }
 
+  // CONVERTERS ROUTES
+
+  // Create Rules
+  createConverters(data: object): Observable<any> {
+    let url = `${this.baseUri}/converters/create`;
+    return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+  }
+
+  // Get all Rules
+  getConverters() {
+    return this.http.get(`${this.baseUri}/converters`);
+  }
+
+  // Get Rule
+  getConverter(id: string): Observable<any> {
+    let url = `${this.baseUri}/converters/read/${id}`;
+    return this.http.get(url, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {};
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
+
+  // Update Rule
+  updateConverter(id: string, data: object): Observable<any> {
+    let url = `${this.baseUri}/converters/update/${id}`;
+    return this.http.put(url, data, { headers: this.headers }).pipe(catchError(this.errorMgmt));
+  }
+
+  // Delete Rule
+  deleteConverter(id: string): Observable<any> {
+    let url = `${this.baseUri}/converters/delete/${id}`;
+    return this.http.delete(url, { headers: this.headers }).pipe(catchError(this.errorMgmt));
+  }
+
   // Error handling
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';

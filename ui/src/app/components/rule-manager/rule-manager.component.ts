@@ -13,17 +13,17 @@ export class RuleManagerComponent implements OnInit {
   submitted = false;
   cols: any[] = [
     // { field: '_id', header: 'Id' },
-    { field: 'name', header: 'Name', type: 'text', filterable: true },
-    { field: 'description', header: 'Description', type: 'text' },
-    { field: 'type', header: 'Type', type: 'select', filterable: true },
-    { field: 'source', header: 'Source', type: 'text', filterable: true },
-    { field: 'dest', header: 'Destination', type: 'text', filterable: true },
+    { field: 'Name', header: 'Name', type: 'text', filterable: true },
+    { field: 'Description', header: 'Description', type: 'text' },
+    { field: 'Type', header: 'Type', type: 'select', filterable: true },
+    { field: 'Source', header: 'Source', type: 'text', filterable: true },
+    { field: 'Dest', header: 'Destination', type: 'text', filterable: true },
     // { field: 'format', header: 'Format', type: 'text' },
-    { field: 'copyMode', header: 'CopyMode', type: 'select', filterable: true },
-    { field: 'customProcessor', header: 'CustomProcessor', width: '300px', type: 'multi' },
-    { field: 'params', header: 'Params', type: 'text' },
-    { field: 'ifOkRule', header: 'IfOkRule', type: 'text' },
-    { field: 'ifNotOkRule', header: 'IfNotOkRule', type: 'text' }
+    { field: 'CopyMode', header: 'CopyMode', type: 'select', filterable: true },
+    { field: 'CustomProcessor', header: 'CustomProcessor', width: '300px', type: 'multi' },
+    { field: 'Params', header: 'Params', type: 'text' },
+    { field: 'IfOkRule', header: 'IfOkRule', type: 'text' },
+    { field: 'IfNotOkRule', header: 'IfNotOkRule', type: 'text' }
   ];
   rules: any[];
   itemList: any = {
@@ -82,17 +82,17 @@ export class RuleManagerComponent implements OnInit {
     this.rules.forEach(rule => {
       const _rule: Rule = {
         _id: rule._id,
-        name: rule.name,
-        description: rule.description,
-        type: rule.type,
-        source: rule.source,
-        dest: rule.dest,
-        format: rule.format,
-        copyMode: rule.copyMode,
-        customProcessor: rule.customProcessor,
-        params: rule.params,
-        ifOkRules: rule.ifOkRules,
-        ifNotOkRules: rule.ifNotOkRules
+        Name: rule.Name,
+        Description: rule.Description,
+        Type: rule.Type,
+        Source: rule.Source,
+        Dest: rule.Dest,
+        Format: rule.Format,
+        CopyMode: rule.CopyMode,
+        CustomProcessor: rule.CustomProcessor,
+        Params: rule.Params,
+        IfOkRules: rule.IfOkRules,
+        IfNotOkRules: rule.IfNotOkRules
       };
       rules.push(_rule);
     });

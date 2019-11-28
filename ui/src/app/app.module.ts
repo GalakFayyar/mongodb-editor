@@ -22,13 +22,17 @@ import { AboutModule } from './components/about/about.module';
 import { LoginModule } from './components/login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
 import { ResponseProfileManagerComponent } from './components/responseprofile-manager/responseprofile-manager.component';
 import { RuleManagerComponent } from './components/rule-manager/rule-manager.component';
+import { ConverterManagerComponent } from './components/converter-manager/converter-manager.component';
 
 import { ResponseProfileManagerRoutingModule } from './components/responseprofile-manager/responseprofile-manager-routing.module';
 import { RuleManagerRoutingModule } from './components/rule-manager/rule-manager-routing.module';
+import { ConverterManagerRoutingModule } from './components/converter-manager/converter-manager-routing.module';
 
 import { ApiService } from './service/api.service';
+
 
 @NgModule({
   imports: [
@@ -47,6 +51,7 @@ import { ApiService } from './service/api.service';
     AboutModule,
     ResponseProfileManagerRoutingModule,
     RuleManagerRoutingModule,
+    ConverterManagerRoutingModule,
     LoginModule,
     TableModule,
     DropdownModule,
@@ -59,6 +64,7 @@ import { ApiService } from './service/api.service';
     AppComponent,
     ResponseProfileManagerComponent,
     RuleManagerComponent,
+    ConverterManagerComponent,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

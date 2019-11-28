@@ -1,0 +1,83 @@
+<div class="container-fluid">
+
+  <div class="card card-body">
+    <div class="form-group row">
+      <div class="input-group input-group-sm col-sm">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="filter-name">Name</span>
+        </div>
+        <input type="text" class="form-control" (change)="dt.filter($event.target.value, 'Name', 'contains')" aria-label="Name" aria-describedby="filter-name" />
+      </div>
+
+      <div class="input-group input-group-sm col-sm">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="filter-source">Source</span>
+        </div>
+        <select class="custom-select form-control" (change)="dt.filter($event.target.value, 'Source', 'contains')" aria-describedby="filter-source">
+          <option value="">Select a protocol...</option>
+          <option *ngFor="let protocol of itemList.protocols" value="{{ protocol }}">{{ protocol }}</option>
+        </select>
+      </div>
+
+      <div class="input-group input-group-sm col-sm">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="filter-dest">Dest</span>
+        </div>
+        <select class="custom-select form-control" (change)="dt.filter($event.target.value, 'Dest', 'contains')" aria-describedby="filter-dest">
+          <option value="">Select a protocol...</option>
+          <option *ngFor="let protocol of itemList.protocols" value="{{ protocol }}">{{ protocol }}</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <p-table
+      #dt
+      class="col-md-12 tab-response-profiles"
+      [loading]="loading"
+      [value]="converters"
+      [paginator]="true"
+      [rows]="2"
+      [scrollable]="true"
+      [columns]="scrollableColumns"
+      [frozenColumns]="frozenColumns"
+      (onFilter)="onFilter($event, dt)"
+      frozenWidth="700px">
+
+        <ng-template pTemplate="header" let-columns>
+            <tr style="height:20px;">
+                <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.sortable ? col.field : null">
+                    {{col.header}}
+                    <p-sortIcon *ngIf="col.sortable" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr style="height:275px;">
+                <td pEditableColumn *ngFor="let col of columns" [style.width]="col.width">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input *ngIf="col.type=='text'" type="text" [(ngModel)]="rowData[col.field]" [(value)]="rowData[col.field]" />
+                            <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.dataSrc]" [(ngModel)]="rowData[col.field]" [closeOnSelect]="false" [addTag]="true"></ng-select>
+                            <!-- <p-dropdown *ngIf="col.type=='select'" [options]="itemList[col.dataSrc]" [(ngModel)]="itemList[col.field]" filter="true"></p-dropdown> -->
+                            <ng-select *ngIf="col.type=='select'" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.dataSrc]" [(ngModel)]="rowData[col.field]" [closeOnSelect]="true"></ng-select>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <span *ngIf="col.type=='text'">{{ rowData[col.field] }}</span>
+                            <ng-select *ngIf="col.type=='multi'" multiple="true" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.dataSrc]" [(ngModel)]="rowData[col.field]" disabled></ng-select>
+                            <ng-select *ngIf="col.type=='select'" dropdownPosition="auto" [searchable]="true" [items]="itemList[col.dataSrc]" [(ngModel)]="rowData[col.field]" disabled></ng-select>
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+          {{filteredValuesLength}} Converters
+      </ng-template>
+    </p-table>
+  </div>
+</div>
