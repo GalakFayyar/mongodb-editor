@@ -24,15 +24,15 @@ export class ResponseProfileManagerComponent implements OnInit {
   rules: any[];
   responseProfiles: any[] = [];
   scrollableColumns: any[] = [
-    { field: 'specific', dataSrc: 'rules', header: 'Specific', width: '250px', type: 'multi' },
-    { field: 'responseType', dataSrc: 'responseTypes', header: 'Type', width: '150px', type: 'select' },
-    { field: 'testPlan', dataSrc: 'testPlans', header: 'Test Plan', width: '250px', type: 'select' },
-    { field: 'card', header: 'Card', width: '250px', type: 'text' },
+    { field: 'Specific', dataSrc: 'rules', header: 'Specific', width: '250px', type: 'multi' },
+    { field: 'ResponseType', dataSrc: 'responseTypes', header: 'Type', width: '150px', type: 'select' },
+    { field: 'TestPlan', dataSrc: 'testPlans', header: 'Test Plan', width: '250px', type: 'select' },
+    { field: 'Card', header: 'Card', width: '250px', type: 'text' },
   ];
   frozenColumns: any[] = [
-    { field: 'name', sortable: false, searchable: true, width: '300px', header: 'Name', type: 'text' },
-    { field: 'protocol', sortable: false, dataSrc: 'protocols', width: '150px', header: 'Protocol', type: 'select' },
-    { field: 'matchingCriteria', dataSrc: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
+    { field: 'Name', sortable: false, searchable: true, width: '300px', header: 'Name', type: 'text' },
+    { field: 'Protocol', sortable: false, dataSrc: 'protocols', width: '150px', header: 'Protocol', type: 'select' },
+    { field: 'MatchingCriteria', dataSrc: 'matchingCriteria', header: 'Matching Criteria', width: '250px', type: 'multi' },
   ];
 
   itemList: any = {
@@ -57,10 +57,10 @@ export class ResponseProfileManagerComponent implements OnInit {
       (res: any[]) => {
         this.rules = res;
 
-        this.itemList.rules =  this.rules.map(rule => rule.name);
+        this.itemList.rules =  this.rules.map(rule => rule.Name);
 
         this.itemList.fieldOperation =  this.rules.map(rule => {
-          return { label: rule.name, value: rule.name }
+          return { label: rule.Name, value: rule.Name }
         });
         this.itemList.fieldOperation.push({ label: 'Copy', value: 'COPY' });
       },
@@ -73,7 +73,7 @@ export class ResponseProfileManagerComponent implements OnInit {
       (res: any[]) => {
         console.log('Response Profiles:', res);
 
-        const listTestPlans = res.map(responseProfile => responseProfile.testPlan);
+        const listTestPlans = res.map(responseProfile => responseProfile.TestPlan);
 
         this.itemList.testPlans = [...new Set(listTestPlans)];
         this.itemList.testPlans = this.itemList.testPlans.filter((elt: any) => elt !== undefined);
@@ -144,10 +144,10 @@ export class ResponseProfileManagerComponent implements OnInit {
     this.responseProfiles.forEach(responseProfile => {
       const rp: ResponseProfile = {
         _id: responseProfile._id,
-        name: responseProfile.name,
-        matchingCriteria: responseProfile.matchingCriteria,
-        responseType: responseProfile.responseType,
-        specific: responseProfile.specific
+        Name: responseProfile.Name,
+        MatchingCriteria: responseProfile.MatchingCriteria,
+        ResponseType: responseProfile.ResponseType,
+        Specific: responseProfile.Specific
       };
       rps.push(rp);
     });

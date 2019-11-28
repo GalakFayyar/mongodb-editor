@@ -6,20 +6,20 @@ let ResponseProfile = new Schema({
     _id: {
         type: String
     },
-    name: {
+    Name: {
         type: String
     },
-    matchingCriteria: {
+    MatchingCriteria: {
         type: []
     },
-    responseType: {
+    ResponseType: {
         type: String
     },
-    specific: {
+    Specific: {
         type: []
     }
 }, {
-    collection: 'responseProfiles'
+    collection: 'ResponseProfiles'
 });
 
 // Avoid deprecated methods

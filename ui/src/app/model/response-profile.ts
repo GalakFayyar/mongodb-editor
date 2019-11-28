@@ -1,7 +1,7 @@
 export class ResponseProfile {
   _id: string;
-  name: string;
-  matchingCriteria: string[];
-  responseType: string;
-  specific: string[];
+  Name: string;
+  MatchingCriteria: string[];
+  ResponseType: string;
+  Specific: string[];
 }
